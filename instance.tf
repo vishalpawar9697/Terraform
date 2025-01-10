@@ -11,5 +11,12 @@ resource "aws_instance" "myserver" {
         name = "vishal"
         env = "dev"
     }
+    user_data = <<-EOF
+              #!/bin/bash
+              apt-get update
+              apt-get install -y apache2
+              systemctl start apache2
+              systemctl enable apache2
+              EOF
   
 }
