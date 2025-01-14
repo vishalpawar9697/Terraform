@@ -11,7 +11,6 @@ resource "aws_instance" "myserver" {
     key_name = "shell-keynew" 
     instance_type = "t2.micro"
     vpc_security_group_ids = [ "aws_security_group.my_sg.id" ]
-    depends_on = [ "aws_security_group.my_sg" ]
     availability_zone = "us-east-1"
     tags = {
       name = "vishal"
