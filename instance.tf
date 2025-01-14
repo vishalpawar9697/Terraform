@@ -10,8 +10,9 @@ resource "aws_instance" "myinstance" {
     ami = "ami-0e2c8caa4b6378d8c"
     key_name = "shell-keynew"
     instance_type = "t2.micro"
-    vpc_security_group_ids = ["aws_security_group.devopsSg.id"]
-    depends_on = [ aws_security_group.my-sg ]
+    vpc_security_group_ids = ["aws_security_group.mysg.id"]
+    depends_on = [ aws_security_group.mys ]
+
     tags = {
         name = "vishal-instance"
     }
@@ -30,8 +31,8 @@ resource "aws_security_group" "mysg" {
         cidr_blocks = ["0.0.0.0/0"]
 
     }
-
-     egress = {
+    
+    egress = {
         from_port = 0
         to_port = 0
         protocol = "-1"
