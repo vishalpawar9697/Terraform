@@ -11,7 +11,7 @@ resource "aws_instance" "devops_instance" {
     key_name = "shell-keynew"
     instance_type = "t2.micro"
     vpc_security_group_ids = ["aws_security_group.devops-sg.id"]
-    depends_on = [ aws_security_group.devops-sg ]
+    depends_on = [ aws_security_group.mysg ]
 
     tags = {
         Name = "vishal-instance"
