@@ -22,6 +22,7 @@ resource "aws_security_group" "mysg" {
     name = "devopsSg"
     description = "Allow HTTP traffic"
     vpc_id = "vpc-0d0f87f5d80c69ffa"
+
     ingress {
         from_port = 80
         to_port = 80
@@ -29,6 +30,7 @@ resource "aws_security_group" "mysg" {
         cidr_blocks = ["0.0.0.0/0"]
 
     }
+    
     egress = {
         from_port = 0
         to_port = 0
