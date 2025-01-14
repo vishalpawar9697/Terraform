@@ -14,7 +14,7 @@ resource "aws_instance" "new_instance" {
     depends_on = [ aws_security_group.mysg ]
 
     tags = {
-        name = "vishal-instance"
+        Name = "vishal-instance"
     }
   
 }
