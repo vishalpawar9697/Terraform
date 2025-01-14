@@ -6,21 +6,22 @@ provider "aws" {
     region = "us-east-1"
 }
 
-resource "aws_instance" "devops_instance" {
-    ami = "ami-0e2c8caa4b6378d8c"
-    key_name = "shell-keynew"
+resource "aws_instance" "myserver" {
+    ami = "ami-01816d07b1128cd2d"
+    key_name = "shell-keynew" 
     instance_type = "t2.micro"
-    vpc_security_group_ids = ["aws_security_group.mysg.id"]
-    depends_on = [aws_security_group.mysg]
-
+    vpc_security_group_ids = [ "aws_security_group.my_sg.id" ]
+    depends_on = [ "aws_security_group.my_sg" ]
+    availability_zone = "us-east-1"
     tags = {
-        Name = "vishal-instance"
+      name = "vishal"
+      env = "dev"
     }
   
 }
 
-resource "aws_security_group" "mysg" {
-  name        = "mysg"
+resource "aws_security_group" "my_sg" {
+  name        = "my_sg"
   description = "Allow HTTP traffic"
   vpc_id = "vpc-0d0f87f5d80c69ffa"
 
