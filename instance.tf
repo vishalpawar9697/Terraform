@@ -41,7 +41,7 @@ resource "aws_instance" "newinstance" {
   user_data              = <<-EOF
                           #!/bin/bash
                           sudo apt-get update -y
-                          sudo apt install -y openjdk-8-jdk wget curl
+                          sudo apt-get install openjdk-11-jdk -y
                           curl -O https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.41/bin/apache-tomcat-9.0.41.tar.gz
                           tar -xzf apache-tomcat-9.0.41.tar.gz
                           sudo mv apache-tomcat-9.0.41 /usr/local/tomcat9
