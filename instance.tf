@@ -12,7 +12,7 @@ resource "aws_instance" "newinstance" {
     instance_type = "t2.micro"
     vpc_security_group_ids = [ aws_security_group.new_sg.id ]
     tags = {
-      name = "vishal"
+      Name = "vishal-instance"
       env = "dev"
     }
   
