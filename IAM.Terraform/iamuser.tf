@@ -27,3 +27,11 @@ resource "aws_iam_user_group_membership" "Testing_munna" {
   user   = aws_iam_user.munna.name
   groups = [aws_iam_group.Testing.name]
 }
+
+# for multiple IAM users created using Terraform
+
+resource "user_names" "users" {
+    for_each = toset(var.user_names)
+    name = each.value
+  
+}
