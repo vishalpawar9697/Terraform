@@ -24,6 +24,6 @@ resource "aws_iam_group_policy_attachment" "Testing_permission" {
  }
 
 resource "aws_iam_user_group_membership" "Testing_munna" {
-  user   = aws_iam_user.munna
+  user   = aws_iam_user.munna.name
   groups = [aws_iam_group.Testing.name]
 }
