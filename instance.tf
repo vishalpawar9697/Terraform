@@ -34,7 +34,7 @@ resource "aws_security_group" "new_sg" {
 
 # EC2 instance definition
 resource "aws_instance" "newinstance" {
-  ami                    = "ami-01816d07b1128cd2d"
+  ami                    = "ami-0e2c8caa4b6378d8c"
   key_name               = "shell-keynew"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.new_sg.id]  # Referencing the security group created above
