@@ -30,8 +30,8 @@ resource "aws_iam_user_group_membership" "Testing_munna" {
 
 # for multiple IAM users created using Terraform
 
-resource "user_names" "users" {
-    for_each = toset(var.user_names)
-    name = each.value
+# resource "user_names" "users" {
+#     for_each = toset(var.user_names)
+#     name = each.value
   
-}
+# }
