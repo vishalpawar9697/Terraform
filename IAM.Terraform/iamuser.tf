@@ -23,7 +23,7 @@ resource "aws_iam_group_policy_attachment" "Testing_permission" {
    depends_on = [aws_iam_group.Testing]
  }
 
-resource "aws_iam_user_group_membership" "Testhing>munna" {
+resource "aws_iam_user_group_membership" "Testhing_munna" {
     user = "aws_iam_user.munna.name"
     groups = [ aws_iam_group.Testing.name ]
   
