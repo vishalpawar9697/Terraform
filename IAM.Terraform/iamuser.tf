@@ -17,7 +17,7 @@ resource "aws_iam_group" "Testing" {
     name = "Testing"
 }
 
-resource "aws_iam_group_policy_attachment" "Testing_permission" {
+resource "aws_iam_group_policy_attachment" "Testing1_permission" {
     group = "aws_iam_group.Testing.name"
     policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
     depends_on = [aws_iam_group.Testing]
