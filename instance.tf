@@ -20,7 +20,8 @@ resource "aws_instance" "newinstance" {
                           sudo mv apache-tomcat-9.0.41 /usr/local/tomcat9
                           sudo chmod +x /usr/local/tomcat9/bin/*.sh
                           sudo /usr/local/tomcat9/bin/startup.sh
-
+                          EOF
+                    
     tags = {
       Name = "vishal-instance"
       env = "dev"
