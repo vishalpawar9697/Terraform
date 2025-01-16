@@ -1,13 +1,13 @@
 # Provider block for AWS
 provider "aws" {
-  region = "us-east-1"
+  region = var.region
 }
 
 # Security group definition
 resource "aws_security_group" "new_sg" {
   name        = "new_sg"
   description = "Allow HTTP traffic"
-  vpc_id      = "vpc-0d0f87f5d80c69ffa"  # It's better to reference a VPC resource dynamically
+  vpc_id      = var.vpc_id  # It's better to reference a VPC resource dynamically
 
   ingress {
     from_port   = 80
@@ -41,9 +41,9 @@ resource "aws_security_group" "new_sg" {
 
 # EC2 instance definition
 resource "aws_instance" "newinstance" {
-  ami                    = "ami-0e2c8caa4b6378d8c"
-  key_name               = "shell-keynew"
-  instance_type          = "t2.micro"
+  ami                    = var.ami_id
+  key_name               = var.key_name
+  instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.new_sg.id]  # Referencing the security group created above
   user_data              = <<-EOF
                           #!/bin/bash
