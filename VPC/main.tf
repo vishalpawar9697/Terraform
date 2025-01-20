@@ -70,7 +70,7 @@ resource "aws_route_table_association" "public_route_table_association" {
 # create elastic ip for nat-gateway
 
 resource "aws_eip" "nat_eip" {
-    vpc = true
+    vpc = aws_vpc.my_vpc.id
     tags = {
         Name = "Nat-eip"
     }
@@ -97,12 +97,12 @@ resource "aws_nat_gateway" "pub_nat_gateway" {
 resource "aws_route" "private_route" {
   route_table_id         = aws_route_table.private_route_table.id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = aws_nat_gateway.nat_gateway.id
+  nat_gateway_id         = aws_nat_gateway.pub_nat_gateway.id
 }
 
 # Associate the private route table with the private subnet
 resource "aws_route_table_association" "private_route_table_association" {
-  subnet_id      = aws_subnet.private_subnet.id
+  subnet_id      = aws_subnet.privat_subnet.id
   route_table_id = aws_route_table.private_route_table.id
 }
 
