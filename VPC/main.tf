@@ -38,7 +38,7 @@ resource "aws_internet_gateway" "my_igw" {
 resource "aws_route_table" "my_route_table" {
     vpc_id = "aws_vpc.my_vpc.id"
     tags = {
-        Name = "Route-table"
+        Name = "my-route-table"
     }  
 }
 # Add a route to the internet gateway in the route table
