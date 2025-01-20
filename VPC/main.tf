@@ -70,7 +70,7 @@ resource "aws_route_table_association" "public_route_table_association" {
 # create elastic ip for nat-gateway
 
 resource "aws_eip" "nat_eip" {
-    vpc = aws_vpc.my_vpc.id
+    vpc = "aws_vpc.my_vpc.id"
     tags = {
         Name = "Nat-eip"
     }
