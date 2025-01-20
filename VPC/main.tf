@@ -24,14 +24,17 @@ resource "aws_subnet" "public_subnet" {
   }
 }
 
+#create privat subnet
+
 resource "aws_subnet" "privat_subnet" {
     vpc_id = aws_vpc.my_vpc.id
     cidr_block = "10.0.2.0/24"
-    map_public_ip_on_launch = true
     availability_zone = "us-west-2c"
     tags = {
-      Name = "privat-subnet"
+      Name = "private-subnet"
+      
     }
+  
 }
 
 # Create an internet gateway
@@ -75,11 +78,11 @@ resource "aws_security_group" "default_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  ingress = {
-    form_port = 8080
-    to_port = 8080
-    protocol = "tcp"
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
