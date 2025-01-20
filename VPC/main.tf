@@ -32,7 +32,7 @@ resource "aws_subnet" "privat_subnet" {
     availability_zone = "us-west-2c"
     tags = {
       Name = "private-subnet"
-      
+
     }
   
 }
@@ -53,6 +53,7 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 
+
 # Add a route to the internet gateway in the route table
 resource "aws_route" "public_route" {
   route_table_id         = aws_route_table.public_route_table.id
@@ -64,6 +65,45 @@ resource "aws_route" "public_route" {
 resource "aws_route_table_association" "public_route_table_association" {
   subnet_id      = aws_subnet.public_subnet.id
   route_table_id = aws_route_table.public_route_table.id
+}
+
+# create elastic ip for nat-gateway
+
+resource "aws_eip" "nat_eip" {
+    vpc = true
+    tags = {
+        Name = "Nat-eip"
+    }
+}
+
+# Ceate a privat route table
+resource "aws_route_table" "private_route_table" {
+    vpc_id = aws_vpc.my_vpc.id
+    tags = {
+      Name = "private-route-table"
+    } 
+}
+
+# create NAT getway
+resource "aws_nat_gateway" "pub_nat_gateway" {
+    allocation_id = "aws_eip.nat_eip.id"
+    subnet_id = "aws_subnet_public_subnet.id"
+    tags = {
+      Name = "nat-gateway"
+    }
+}
+
+# Route private subnet traffic through the NAT Gateway
+resource "aws_route" "private_route" {
+  route_table_id         = aws_route_table.private_route_table.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.nat_gateway.id
+}
+
+# Associate the private route table with the private subnet
+resource "aws_route_table_association" "private_route_table_association" {
+  subnet_id      = aws_subnet.private_subnet.id
+  route_table_id = aws_route_table.private_route_table.id
 }
 
 # Create a security group
